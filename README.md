@@ -42,7 +42,7 @@ The table layouts are as follows
 
 * ORDERS
   * ORDNUM primary key, not null Long
-  * ORDAMOUNT double
+    * ORDAMOUNT double
   * ADVANCEAMOUNT double
   * CUSTCODE Long foreign key (one customer to many orders) not null
   * ORDERDESCRIPTION String

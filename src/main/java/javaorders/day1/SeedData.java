@@ -1,4 +1,4 @@
-package com.lambdaschool.crudyorders;
+package javaorders.day1;
 
 import com.github.javafaker.Faker;
 import com.lambdaschool.crudyorders.models.Agent;
@@ -13,11 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
 
 
 @Transactional

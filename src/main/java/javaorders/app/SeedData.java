@@ -1,14 +1,5 @@
-package javaorders.day1;
+package javaorders.app;
 
-import com.github.javafaker.Faker;
-import com.lambdaschool.crudyorders.models.Agent;
-import com.lambdaschool.crudyorders.models.Customer;
-import com.lambdaschool.crudyorders.models.Order;
-import com.lambdaschool.crudyorders.models.Payment;
-import com.lambdaschool.crudyorders.repositories.AgentsRepository;
-import com.lambdaschool.crudyorders.repositories.CustomersRepository;
-import com.lambdaschool.crudyorders.repositories.OrdersRepository;
-import com.lambdaschool.crudyorders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -51,6 +42,12 @@ public class SeedData implements CommandLineRunner {
      *
      * @param args The parameter is required by the parent interface but is not used in this process.
      */
+    /**
+    * Command line runner runs once at the start of the application, we are going to
+     * * implement a method called run that will load this data once at the start of the application.
+    *
+    *
+    * */
     @Transactional
     @Override
     public void run(String[] args) throws Exception {

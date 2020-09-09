@@ -1,4 +1,4 @@
-package javaorders.day1.services;
+package javaorders.app.services;
 
 public interface OrderService {
 }

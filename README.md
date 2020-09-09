@@ -92,3 +92,6 @@ The database will be available from the H2 Console. Each table will contain the 
   * [ ] Randomly assign 0 - 10 orders to each customer
     * [ ] Randomize as much of the data as possible
     * [ ] All orders can be of the same payment type
+    
+    #One to many or many to one relationships one resturant can sell pasta and another resturant can as well but each sell thier own version of that pasta
+    #Many to many, many resturants can have many different payment options.

@@ -24,7 +24,7 @@ public class CustomerController {
         return new ResponseEntity<>(custList, HttpStatus.OK);
     }
 
-//    http://localhost:2019/customers/customer/7
+  //http://localhost:2019/customers/customer/7
     @GetMapping(value = "/customer/{id}", produces = "application/json")
     public ResponseEntity<?> getCustId(@PathVariable long id) {
         Customer findName = customerService.getCustId(id);
@@ -32,4 +32,4 @@ public class CustomerController {
     }
 
 }
-// this is where we create our endpoints and connect them to the respositor
+// this is where we create our endpoints and connect them to the respository

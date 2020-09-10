@@ -42,7 +42,7 @@ The table layouts are as follows
 
 * ORDERS
   * ORDNUM primary key, not null Long
-    * ORDAMOUNT double
+  * ORDAMOUNT double
   * ADVANCEAMOUNT double
   * CUSTCODE Long foreign key (one customer to many orders) not null
   * ORDERDESCRIPTION String
@@ -85,7 +85,7 @@ The database will be available from the H2 Console. Each table will contain the 
 
 ### Stretch Goal
 
-* [ ] Implement Javafaker
+  * [ ] Implement Javafaker
   * [ ] Create around 100 new customers
   * [ ] Randomize as much of the data as possible
   * [ ] You can assign all new customers to the same agent
@@ -93,5 +93,7 @@ The database will be available from the H2 Console. Each table will contain the 
     * [ ] Randomize as much of the data as possible
     * [ ] All orders can be of the same payment type
     
-    #One to many or many to one relationships one resturant can sell pasta and another resturant can as well but each sell thier own version of that pasta
-    #Many to many, many resturants can have many different payment options.
+    *One to many or many to one relationships ex: one resturant can sell pasta and another resturant can as well but 
+    *each sell their own version of that pasta
+    *Many to many ex: many resturants can have many different payment options. Many to mamy relationships are 
+    *represented by a join table.

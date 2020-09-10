@@ -3,6 +3,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/** * AGENTS
+ * * Agents has a One to Many relationship to Customers
+ *  AGENTCODE Long foreign key (one agent to many customers) not null
+ * AGENTCODE primary key, not null Long
+ * AGENTNAME string
+ * WORKINGAREA string
+ * COMMISSION double
+ * PHONE string
+ * COUNTRY string
+ * OneToMany
+ * **/
+
+
+
 @Entity
 @Table(name = "agents")
 public class Agent {
@@ -19,11 +33,23 @@ public class Agent {
     //join the tables together and map one agent to many customers
     @OneToMany(mappedBy = "agent",
             cascade = CascadeType.ALL, // do this to both tables cascade down to other table
-            orphanRemoval = true) // remove anything not associated with this table
+            orphanRemoval = true) // remove anything not associated with this table anything without association
     private List<Customer> customers = new ArrayList<>();
 
-    public Agent() {
+
+
+
+    public Agent() { // This is the default constructor that is used by JPA. You must always have this.
     }
+
+public Agent (String agentname, String workingarea, double commission, String phone, String country){
+        this.agentname = agentname;
+        this.workingarea = workingarea;
+        this.commission = commission;
+        this.phone = phone;
+        this.country = country;
+} // closes contructor
+
 
     public Agent(String agentname, String workingarea, double commission, String phone, String country, List<Customer> customers) {
         this.agentname = agentname;
@@ -36,7 +62,7 @@ public class Agent {
 
     // Getters and Setters
 
-    public String getAgentname() {
+    private String getAgentname() {
         return agentname;
     }
 

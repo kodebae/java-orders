@@ -2,29 +2,34 @@ package javaorders.app.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //import org.hibernate.criterion.Orders;
-
+import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.List;
 
-//* Customers has a foreign key to Agents (AGENTCODE) this means:
-//        * Customers has a Many to One relationship to Agents and
-//        * Agents has a One to Many relationship to Customers
-//connect the customers table to the agents table in a many to one relation
+/** Customers has a foreign key to Agents (AGENTCODE) this means:
+ * Customers has a Many to One relationship to Agents and
+ * Agents has a One to Many relationship to Customers
+ * connect the customers table to the agents table in a many to one relation
+ * * CUSTOMERS
+ *   * CUSTCODE primary key, not null Long
+ *   * CUSTNAME String, not null
+ *   * CUSTCITY String
+ *   * WORKINGAREA String
+ *   * CUSTCOUNTRY String
+ *   * GRADE String
+ *   * OPENINGAMT double
+ *   * RECEIVEAMT double
+ *   * PAYMENTAMT double
+ *   * OUTSTANDINGAMT double
+ *   * PHONE String
+ *   * AGENTCODE Long foreign key (one agent to many customers) not null
+ *   ManyToOne relationship means that there is only one customer that this can be associated with.
+ */
 
-@ManyToOne
-@JoinColumn(name = "agentcode", nullable = false)
-@JsonIgnoreProperties("customer")
-private Agent agent;
-
-//connect customers to orders table in a one to many relation
-
-@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true) //must be named exactly the same
-@JsonIgnoreProperties("customer")
-    List<Order> orders = new ArrayList<>();
 
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 
 public class Customer {
     //dim primary key
@@ -52,21 +57,24 @@ public class Customer {
     private double outstandingamt;
     //dim phone
     private String phone;
-//
-//    //connect the customers table to the agents table in a many to one relation
-//
-//    @ManyToOne
-//    @JoinColumn(name = "agentcode", nullable = false)
-//    @JsonIgnoreProperties("customer")
-//    private Agent agent;
-//
-//    //connect customers to orders table in a one to many relation
-//
-//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnoreProperties("customer")
-//    List<Order> orders = new ArrayList<>();
 
-    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent, List<Order> orders) {
+    // must choose a field to join the two tables together in our case it is the agent code. Our join column name must match
+// the generated value private long ID.
+    @ManyToOne
+    @JoinColumn(name = "agentcode", nullable = false) // a foreign key mean this connects customer to agent code table with this annotation
+    @JsonIgnoreProperties("customer")
+    private Agent agent;
+
+//connects customers to orders table which is the opposite in the other model
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true) //must be named exactly the same
+    @JsonIgnoreProperties("customer")
+    List<Order> orders = new ArrayList<>();
+
+    public Customer() { // This is the default constructor that is used by JPA. You must always have this.
+    }
+
+    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -78,11 +86,10 @@ public class Customer {
         this.outstandingamt = outstandingamt;
         this.phone = phone;
         this.agent = agent;
-        this.orders = orders;
+//        this.orders = orders;
     } // closes constructor
 
-    public Customer() {
-    }
+
 
     public String getCustname() {
         return custname;

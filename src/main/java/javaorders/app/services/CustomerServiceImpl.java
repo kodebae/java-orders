@@ -9,7 +9,12 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 
-//implements the CustomerServices Interface
+/** Implements the CustomerServices Interface
+ * treat everything that happens as a single transaction.
+ * Every method that changes data gets this
+ * If you have a method that is transactional the entire the class needs to be transactional. <---
+ * Will stop the save method from working.
+ * **/
 @Transactional
 @Service(value = "customerService")
 public class CustomerServiceImpl implements CustomerService {

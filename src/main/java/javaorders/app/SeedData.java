@@ -1,25 +1,49 @@
 package javaorders.app;
 
+
+import javaorders.app.models.Agent;
+import javaorders.app.models.Customer;
+import javaorders.app.models.Order;
+import javaorders.app.models.Payment;
+import javaorders.app.repositories.AgentRepository;
+import javaorders.app.repositories.CustomerRepository;
+import javaorders.app.repositories.OrdersRepository;
+import javaorders.app.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Set;
+import java.util.Random;
+
+/**
+ * Must import and build all of the repositories to get the seed data file to work.
+ * Spring Data JPA will seed the database. This will randomly generate Id's.
+ * SeedData puts both known and random data into the database. It implements CommandLineRunner.
+ * CommandLineRunner: Spring Boot automatically runs the run method once and only once after
+ * the application context has been loaded. This means that we do not have to manually send id's
+ * like we do with our data.sql file.
+ * Will stop the save method from working. CLR will set up all models and repositories all set up BEFORE
+ * TomCat starts looking for requests.
+ *
+ * **/
 
 
-@Transactional
+// If you have a method that is transactional the entire the class needs to be transactional. <---
+@Transactional //Every method that changes data gets this
 @Component
-public class SeedData implements CommandLineRunner {
+public class SeedData implements CommandLineRunner { // can technically call this class anything, but ti's called SeedData
     /**
      * Connects the customer table to this SeedData method
      */
     @Autowired
-    private CustomersRepository custrepos;
+    private CustomerRepository custrepos;
 
     /**
      * Connects the agents table to this SeedData method
      */
     @Autowired
-    private AgentsRepository agentrepos;
+    private AgentRepository agentrepos;
 
     /**
      * Connects the orders table to this SeedData method
@@ -43,14 +67,17 @@ public class SeedData implements CommandLineRunner {
      * @param args The parameter is required by the parent interface but is not used in this process.
      */
     /**
+     *
     * Command line runner runs once at the start of the application, we are going to
      * * implement a method called run that will load this data once at the start of the application.
-    *
+    * This method must be implemented to run the seed data at the beginning of the application
+     * loading process.
     *
     * */
     @Transactional
     @Override
     public void run(String[] args) throws Exception {
+
         Payment pay1 = new Payment("Cash");
         Payment pay2 = new Payment("Gift Card");
         Payment pay3 = new Payment("Credit Card");

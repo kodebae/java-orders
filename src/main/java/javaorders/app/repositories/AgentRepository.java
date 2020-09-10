@@ -1,5 +1,7 @@
 package javaorders.app.repositories;
 
-public interface AgentRepository {
+import javaorders.app.models.Agent;
+import org.springframework.data.repository.CrudRepository;
 
+public interface AgentRepository extends CrudRepository <Agent, Long> {
 }

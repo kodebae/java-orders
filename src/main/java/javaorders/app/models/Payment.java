@@ -7,13 +7,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//* PAYMENTS
-//        * PAYMENTID primary key, not null long
-//        * TYPE String not null
-
+/** PAYMENTS
+* PAYMENTID primary key, not null long
+* TYPE String not null
+*/
 
 // Primary keys and join columns have to be the same
-@Entity
+@Entity // allows interaction with the table
 @Table(name = "payments")
 public class Payment {
     @Id
@@ -21,10 +21,10 @@ public class Payment {
     @Column(nullable = false)
     private long paymentid;
 
-    @Column(nullable = false)
+    @Column(nullable = false) // when something is created it has to have a name
     private String type;
 
-    @ManyToMany(mappedBy = "payments")
+    @ManyToMany()
     @JoinTable(name = "orderspayments",
             joinColumns = @JoinColumn(name = "paymentid"),
             inverseJoinColumns = @JoinColumn(name = "ordnum"))
@@ -34,9 +34,8 @@ public class Payment {
     public Payment() { // we must generate our default constructor nothing goes inside of this
     }
 
-    public Payment(String type, List<Order> orders) { // basic constructor for all the fields except ID's
+    public Payment(String type) { // basic constructor for all the fields except ID's
         this.type = type;
-        this.orders = orders;
     }
 
     // Getters and Setters
@@ -50,11 +49,11 @@ public class Payment {
         this.type = type;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public Set<Order> getOrders() {
+        return this.orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     } // closes getter and setters
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomerService {
     List<Customer> findAllCustomers();
-    Customer getCustId(long id);
+    Customer custcode(long id);
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 //import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+//import java.util.List;
 import java.util.Set;
 
 /** PAYMENTS
@@ -14,7 +14,7 @@ import java.util.Set;
 
 // Primary keys and join columns have to be the same
 @Entity // allows interaction with the table
-@Table(name = "payments")
+@Table(name = "payments") // the table name
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,10 +24,7 @@ public class Payment {
     @Column(nullable = false) // when something is created it has to have a name
     private String type;
 
-    @ManyToMany()
-    @JoinTable(name = "orderspayments",
-            joinColumns = @JoinColumn(name = "paymentid"),
-            inverseJoinColumns = @JoinColumn(name = "ordnum"))
+    @ManyToMany(mappedBy = "payments")
     @JsonIgnoreProperties(value = "payments")
     private Set<Order> orders = new HashSet<>();
 

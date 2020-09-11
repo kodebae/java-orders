@@ -42,14 +42,15 @@ public class Order {
 
 
 
-    @ManyToOne
+    @ManyToOne // make the name plural ex: payments with an 's'
     @JoinColumn(name = "custcode", nullable = false)
+    @JsonIgnoreProperties(value = "orders")
     private Customer customer;
 
     @ManyToMany()
-    @JoinTable(name = "orderspayments",
-            joinColumns = @JoinColumn(name = "ordnum"),
-            inverseJoinColumns = @JoinColumn(name = "paymentid"))
+    @JoinTable(name = "orderspayments", // how the two tables join together
+            joinColumns = @JoinColumn(name = "ordnum"), // id of model you're in
+            inverseJoinColumns = @JoinColumn(name = "paymentid")) // id of model you're relating to.
     @JsonIgnoreProperties(value = "orders")
     private Set<Payment> payments = new HashSet<>(); // forces us to have unique values
 

@@ -29,7 +29,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "customers")
+@Table(name = "customers") // ignore customers coming from related tables with @JsonIgnore both lists and singular
 
 public class Customer {
     //dim primary key
@@ -62,14 +62,16 @@ public class Customer {
 // the generated value private long ID.
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false) // a foreign key mean this connects customer to agent code table with this annotation
-    @JsonIgnoreProperties("customer")
+    @JsonIgnoreProperties(value = "customers")
     private Agent agent;
 
-//connects customers to orders table which is the opposite in the other model
+//connects customers to orders table which is the opposite in the other model. Only one customer per order
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true) //must be named exactly the same
-    @JsonIgnoreProperties("customer")
+    @JsonIgnoreProperties(value = "customer")
     List<Order> orders = new ArrayList<>();
+
+
 
     public Customer() { // This is the default constructor that is used by JPA. You must always have this.
     }

@@ -1,4 +1,6 @@
 package javaorders.app.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +32,11 @@ public class Agent {
     private String phone;
     private String country;
 
-    //join the tables together and map one agent to many customers
+    //join the tables together and map one agent to many customers. Referencing each other causes an infinate loop.
     @OneToMany(mappedBy = "agent",
             cascade = CascadeType.ALL, // do this to both tables cascade down to other table
             orphanRemoval = true) // remove anything not associated with this table anything without association
+    @JsonIgnoreProperties(value = "agent")
     private List<Customer> customers = new ArrayList<>();
 
 
@@ -50,6 +53,8 @@ public Agent (String agentname, String workingarea, double commission, String ph
         this.country = country;
 } // closes contructor
 
+
+//    public List<Customer> customers = new ArrayList<>();
 
     public Agent(String agentname, String workingarea, double commission, String phone, String country, List<Customer> customers) {
         this.agentname = agentname;
